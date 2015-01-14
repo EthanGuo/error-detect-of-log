@@ -20,7 +20,7 @@ def api_detect(tag):
     if not tag in TAGS.keys():
         return jsonify(status=0, msg='tag not supported', features={})
     try:
-        data = json.loads(request.data).get('logcat')
+        data = request.data
         if data:
             md5, features = TAGS[tag](data)
             if features:
