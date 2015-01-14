@@ -22,9 +22,9 @@ def api_detect(tag):
     try:
         data = json.loads(request.data).get('logcat')
         if data:
-            features = TAGS[tag](data)
+            md5, features = TAGS[tag](data)
             if features:
-                return jsonify(status=1, msg='feature detected', features=features)
+                return jsonify(status=1, msg='feature detected', features=features, md5=md5)
             else:
                 return jsonify(status=0, msg='failed to detect features', features={})
         else:
